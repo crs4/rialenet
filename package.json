@@ -1,32 +1,43 @@
 {
-  "name": "rialenet-forum",
+  "name": "rialenet_test_react_build",
   "version": "0.1.0",
-  "description": "RialeNet Application",
-  "engines": {
-    "node": "16.x"
-  },
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "node test.js"
-  },
+  "private": true,
   "dependencies": {
-    "ejs": "^3.1.5",
-    "express": "^4.15.2"
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
+    "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "^5.1.3",
+    "moment": "^2.29.3",
+    "node-fetch": "^2.6.7",
+    "react": "^18.1.0",
+    "react-comments-section": "^1.0.7",
+    "react-dom": "^18.1.0",
+    "react-scripts": "5.0.1",
+    "reactstrap": "^9.0.2",
+    "web-vitals": "^2.1.4"
   },
-  "devDependencies": {
-    "got": "^11.3.0",
-    "tape": "^4.7.0"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/crs4/rialenet"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "keywords": [
-    "node",
-    "rialenet",
-    "forum",
-    "wenet"
-  ],
-  "license": "MIT"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

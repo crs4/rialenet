@@ -19,7 +19,7 @@ let tokens = {}
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/connect', (req, res) => {
   console.log("connect-to_wenet request (per ottenere authcode (ed external_id))");

@@ -49,6 +49,7 @@ app.get('/tasks', async (req, res) => {
 })
 
 const getAllTasks = async () => {
+  console.log(`Richiamo getAllTasks() con accessToken:${tokens.access_token}`);
   const url = `${WENET_URL}/prod/api/service/tasks?appId=${APP_ID}`
   try {
     const response = await
@@ -131,7 +132,7 @@ const requestToken = async (oauthCode) => {
 
 
 
-app.get('/', function (req, res) {
+app.get('/*', function (req, res) {
   console.log("Root called!!!!")
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });

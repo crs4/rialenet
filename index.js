@@ -45,8 +45,8 @@ app.get('/callback', async (req, res) => {
   tokens = await requestToken(code);
   console.log("ACCESS TOKEN RICAVATO!");
   //res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/complete?app_id=${APP_ID}`)
-  window.location.replace("/forum")
-  //return res.redirect("/forum");
+  //window.location.replace("/forum")
+  return res.redirect("/forum");
 })
 
 app.get('/tasks', async (req, res) => {

@@ -4,6 +4,8 @@ const path = require('path');
 const PORT = process.env.PORT || 3333
 //https://levelup.gitconnected.com/how-to-render-react-app-using-express-server-in-node-js-a428ec4dfe2b
 
+//https://stackoverflow.com/questions/49048884/react-router-how-to-redirect-to-an-express-get
+
 // WENET CONFIG DATA 
 const CLIENT_SECRET = "Ayj0D6wWRiN9QdKqkVof"
 const APP_ID = "xUi1mwCJ0X"
@@ -24,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.get('/connect', (req, res) => {
   console.log("connect-to_wenet request (per ottenere authcode (ed external_id))");
   res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/login?client_id=${CLIENT_ID}&external_id=${EXTERNAL_ID}`)
+
 })
 
 app.get('/conversational_callback', async (req, res) => {
@@ -37,10 +40,13 @@ app.get('/callback', async (req, res) => {
   const code = req.query.code
   //const externalId = req.query.external_id
   console.log("SERVER OAUTH CODE:", code)
-
+  //alert("OAUTH CODE")
   // request token
   tokens = await requestToken(code);
-  return res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/complete?app_id=${APP_ID}`)
+  console.log("ACCESS TOKEN RICAVATO!");
+  //res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/complete?app_id=${APP_ID}`)
+  window.location.replace("/forum")
+  //return res.redirect("/forum");
 })
 
 app.get('/tasks', async (req, res) => {

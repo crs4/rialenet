@@ -1,19 +1,22 @@
 const express = require('express')
-const fetch = require("node-fetch");
+const session = require("express-session");
+const wenet_config = require("./wenet_config");
 const path = require('path');
 const PORT = process.env.PORT || 3333
 //https://levelup.gitconnected.com/how-to-render-react-app-using-express-server-in-node-js-a428ec4dfe2b
 
 //https://stackoverflow.com/questions/49048884/react-router-how-to-redirect-to-an-express-get
 
+
 // WENET CONFIG DATA 
-const CLIENT_SECRET = "Ayj0D6wWRiN9QdKqkVof"
-const APP_ID = "xUi1mwCJ0X"
-const CLIENT_ID = "xUi1mwCJ0X"
-const EXTERNAL_ID = "528"
-const WENET_URL = "http://internetofus.u-hopper.com"
-const COMMUNITY_ID = "624703620e5af47df0eed5eb"
-const TASK_TYPE_ID = "626a6745925841535833b638" //da connettore conversazionale/App logic
+const CLIENT_SECRET = wenet_config.CLIENT_SECRET
+const APP_ID = wenet_config.APP_ID
+const CLIENT_ID = wenet_config.CLIENT_ID
+
+const WENET_URL = wenet_config.WENET_URL
+const COMMUNITY_ID = wenet_config.COMMUNITY_ID
+const TASK_TYPE_ID =  wenet_config.TASK_TYPE_ID //da connettore conversazionale/App logic
+//var  EXTERNAL_ID = null; // 528
 let tokens = {}
 
 // ------------------ //
@@ -23,14 +26,28 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'build')));
 
+//http://expressjs.com/en/resources/middleware/session.html
+var sessionConfig = {
+  secret: 'WENET_RIALE_SECRET_SESSION',
+  cookie: {}
+}
+app.use(session(sessionConfig))
+
 app.get('/connect', (req, res) => {
   console.log("connect-to_wenet request (per ottenere authcode (ed external_id))");
-  res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/login?client_id=${CLIENT_ID}&external_id=${EXTERNAL_ID}`)
-
+  const passcode = req.query.passcode;
+  const external_id = wenet_config.users[passcode] || null;
+  // session data in express
+  //https://stackoverflow.com/questions/47200350/save-data-in-express-session
+  let sessData = req.session;
+  sessData.passcode = passcode;
+  sessData.external_id = external_id;
+  console.log("Dati di sessione:", sessData);
+  res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/login?client_id=${CLIENT_ID}&external_id=${external_id}`)
 })
 
 app.get('/conversational_callback', async (req, res) => {
-  res.send("Called conversetional callback!")
+  res.send("Called conversational callback!")
 });
 
 app.get('/callback', async (req, res) => {
@@ -38,15 +55,16 @@ app.get('/callback', async (req, res) => {
    * callback di autenticazione
    */
   const code = req.query.code
+  const passcode = req.session.passcode
+
   //const externalId = req.query.external_id
   console.log("SERVER OAUTH CODE:", code)
-  //alert("OAUTH CODE")
   // request token
   tokens = await requestToken(code);
   console.log("ACCESS TOKEN RICAVATO!");
   //res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/complete?app_id=${APP_ID}`)
-  //window.location.replace("/forum")
-  return res.redirect("/forum");
+ 
+  return res.redirect(`/forum?passcode=${passcode}`);
 })
 
 app.get('/tasks', async (req, res) => {
@@ -78,11 +96,31 @@ const getAllTasks = async () => {
 
 app.post('/newtask', async (req, res) => {
   console.log("Request body content->>", req.body["content"])
-  const result = await createNewTask(req.body["content"])
+  const result = await createNewTask(req.session.external_id,req.body["content"])
   res.send(`result di newTask:${result}`)
 })
 
-const createNewTask = async (content) => {
+const createTaskBody = (external_id,content) => {
+  return (
+    {
+      "taskTypeId": TASK_TYPE_ID, //  "626a6745925841535833b638",
+      "appId": APP_ID, //"GOJt2zQA6B",
+      "communityId": COMMUNITY_ID,    //"624594390e5af47df0eed5ea",
+      "requesterId": external_id, //"528",
+      "goal": {
+        "name": "Help 4 for timeline master",
+        "description": `${content}`,
+        "keywords": [
+          "social interaction",
+          "lab"
+        ]
+      }
+    }
+  )
+}
+
+
+const createNewTask = async (external_id,content) => {
   const url = `${WENET_URL}/prod/api/service/task`
   //console.log("requestTokenDetails: Tokens:", tokens);
   //console.log("requestTokenDetails: Access Token:", tokens.access_token)
@@ -94,7 +132,7 @@ const createNewTask = async (content) => {
           "Content-Type": "application/json"
         },
         method: "POST",
-        body: JSON.stringify(createTaskBody(content))
+        body: JSON.stringify(createTaskBody(external_id,content))
       })
     const details = await response.json()
     console.log("CREATE TASK RESPONSE:", details)
@@ -145,4 +183,4 @@ app.get('/*', function (req, res) {
 
 
 
- app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.listen(PORT, () => console.log(`Listening on ${PORT}`))

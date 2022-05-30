@@ -17,8 +17,7 @@ const CLIENT_ID = wenet_config.CLIENT_ID
 const WENET_URL = wenet_config.WENET_URL
 const COMMUNITY_ID = wenet_config.COMMUNITY_ID
 const TASK_TYPE_ID =  wenet_config.TASK_TYPE_ID //da connettore conversazionale/App logic
-//var  EXTERNAL_ID = null; // 528
-let tokens = {}
+
 
 // ------------------ //
 
@@ -61,7 +60,8 @@ app.get('/callback', async (req, res) => {
   //const externalId = req.query.external_id
   console.log("SERVER OAUTH CODE:", code)
   // request token
-  tokens = await requestToken(code);
+  const tokens = await requestToken(code);
+  req.session.tokens = tokens;
   console.log("ACCESS TOKEN RICAVATO!");
   //res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/complete?app_id=${APP_ID}`)
  
@@ -69,11 +69,21 @@ app.get('/callback', async (req, res) => {
 })
 
 app.get('/tasks', async (req, res) => {
-  const result = await getAllTasks()
-  res.send(result)
+  const passcode = req.query.passcode;
+  if (req.session.passcode!=passcode)
+  {
+    console.log("Passcode dell'utente non coincide con quello di sessione!");
+    res.status(401).send([]);
+  }
+  else
+  {
+    const result = await getAllTasks(req.session.tokens)
+    res.send(result)
+  }
+  
 })
 
-const getAllTasks = async () => {
+const getAllTasks = async (tokens) => {
   console.log(`Richiamo getAllTasks() con accessToken:${tokens.access_token}`);
   const url = `${WENET_URL}/prod/api/service/tasks?appId=${APP_ID}`
   try {
@@ -97,7 +107,7 @@ const getAllTasks = async () => {
 
 app.post('/newtask', async (req, res) => {
   console.log("Request body content->>", req.body["content"])
-  const result = await createNewTask(req.session.external_id,req.body["content"])
+  const result = await createNewTask(req.session.tokens,req.session.external_id,req.body["content"])
   res.send(`result di newTask:${result}`)
 })
 
@@ -121,7 +131,7 @@ const createTaskBody = (external_id,content) => {
 }
 
 
-const createNewTask = async (external_id,content) => {
+const createNewTask = async (tokens,external_id,content) => {
   const url = `${WENET_URL}/prod/api/service/task`
   //console.log("requestTokenDetails: Tokens:", tokens);
   //console.log("requestTokenDetails: Access Token:", tokens.access_token)

@@ -2,12 +2,16 @@ const fetch = require("node-fetch");
 const express = require('express')
 const session = require("express-session");
 const wenet_config = require("./wenet_config");
+const dbConnector = require("./db/db_connector");
+
 const path = require('path');
 const PORT = process.env.PORT || 3333
 //https://levelup.gitconnected.com/how-to-render-react-app-using-express-server-in-node-js-a428ec4dfe2b
 
 //https://stackoverflow.com/questions/49048884/react-router-how-to-redirect-to-an-express-get
 
+// Scenario APP WeNet
+//https://docs.google.com/document/d/1KnJP-5QYUonym3w9pPGfs3sFzarsSOggwWPmNwbqR70/edit
 
 // WENET CONFIG DATA 
 const CLIENT_SECRET = wenet_config.CLIENT_SECRET
@@ -20,23 +24,41 @@ const TASK_TYPE_ID =  wenet_config.TASK_TYPE_ID //da connettore conversazionale/
 
 
 // ------------------ //
-
+var SQLiteStore = require('connect-sqlite3')(session);
 
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'build')));
 
+/*
 //http://expressjs.com/en/resources/middleware/session.html
 var sessionConfig = {
   secret: 'WENET_RIALE_SECRET_SESSION',
   cookie: {}
 }
 app.use(session(sessionConfig))
+*/
 
-app.get('/connect', (req, res) => {
-  console.log("connect-to_wenet request (per ottenere authcode (ed external_id))");
+//https://github.com/rawberg/connect-sqlite3
+app.use(session({
+  store: new SQLiteStore,
+  secret: 'WENET_RIALE_SECRET_SESSION',
+  cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 } // 1 week
+}));
+
+
+app.get('/db', async (req, res) => {
+  const data = await dbConnector.getUserByPasscode("");
+  res.send(data);
+});
+
+app.get('/connect', async (req, res) => {
+  
   const passcode = req.query.passcode;
-  const external_id = wenet_config.users[passcode] || null;
+  console.log("connect-to_wenet request (per ottenere authcode (ed external_id)) da passcode:",passcode);
+  const user = await dbConnector.getUserByPasscode(passcode)
+  console.log("User->",user);
+  const external_id = (user!= null && user.length>0) ? user[0]["wenet_id"] : null;
   // session data in express
   //https://stackoverflow.com/questions/47200350/save-data-in-express-session
   let sessData = req.session;

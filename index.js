@@ -88,14 +88,14 @@ app.get('/callback', async (req, res) => {
 
 app.get('/tasks', async (req, res) => {
   const passcode = req.query.passcode;
-  /*
+   
   if (req.session.passcode!=passcode)
   {
     console.log("Passcode dell'utente non coincide con quello di sessione!");
     res.status(401).send([]);
   }
   else
-  */
+   
   {
     const result = await wenetConnector.getAllTasks(req.session.tokens)
     res.send(result)

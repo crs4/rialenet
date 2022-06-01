@@ -1,5 +1,6 @@
 
 const wenet_config = require("../wenet_config");
+const fetch = require("node-fetch");
 
 const WENET_URL = wenet_config.WENET_URL
 const APP_ID = wenet_config.APP_ID

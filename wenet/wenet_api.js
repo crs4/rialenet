@@ -2,6 +2,7 @@
 const wenet_config = require("../wenet_config");
 
 const WENET_URL = wenet_config.WENET_URL
+const APP_ID = wenet_config.APP_ID
 
 const getAllTasks = async (tokens) => {
     console.log(`Richiamo getAllTasks() con accessToken:${tokens.access_token}`);

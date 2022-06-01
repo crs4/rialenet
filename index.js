@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3333
 //https://docs.google.com/document/d/1KnJP-5QYUonym3w9pPGfs3sFzarsSOggwWPmNwbqR70/edit
 
 // WENET CONFIG DATA 
-const CLIENT_SECRET = wenet_config.CLIENT_SECRET
+
 const CLIENT_ID = wenet_config.CLIENT_ID
 const WENET_URL = wenet_config.WENET_URL
 

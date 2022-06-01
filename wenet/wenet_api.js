@@ -4,6 +4,8 @@ const fetch = require("node-fetch");
 
 const WENET_URL = wenet_config.WENET_URL
 const APP_ID = wenet_config.APP_ID
+const CLIENT_ID = wenet_config.CLIENT_ID
+const CLIENT_SECRET = wenet_config.CLIENT_SECRET
 const COMMUNITY_ID = wenet_config.COMMUNITY_ID
 const TASK_TYPE_ID =  wenet_config.TASK_TYPE_ID //da connettore conversazionale/App logic
 

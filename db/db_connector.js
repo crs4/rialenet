@@ -6,11 +6,18 @@
 
 //https://www.npmjs.com/package/better-sqlite3-session-store
 
+class Role 
+{ static admin=1;
+  static teacher=2;
+  static student=3;
+}
+
 
 
 const path = require('path');
-const sqlite3 = require('sqlite3').verbose()
-const DBSOURCE = path.resolve('db/rialenet.sqlite')
+const wenet_config = require("../wenet_config");
+const sqlite3 = require('sqlite3').verbose();
+const DBSOURCE = path.resolve(wenet_config.DBSOURCE);
 
 const db = new sqlite3.Database(DBSOURCE, (err) => {
     if (err) {
@@ -40,25 +47,25 @@ const getUserByPasscode = async (passcode) =>
     return await db_all(sql, params);
    }
 
-
-const getAllUsers = () =>
-{
-  
-    var sql = "select * from users"
-    var params = []
-    db.all(sql, params, (err, rows) => {
-        if (err) {
-            console.log("Sqlite error:",err);
-          return [];
-        }
-        console.log("getAllUsers() result:", rows);
-          return rows;
-        })
+   const getAllUsersByRole = async (role) =>
+   {
+       var sql = "SELECT * FROM users WHERE role_id=?"
+       var params = [role];
+       return await db_all(sql, params);
       }
 
-exports.getAllUsers = getAllUsers;
-exports.getUserByPasscode = getUserByPasscode;
+    const getAllUsers = async () =>
+      {
+          var sql = "SELECT * FROM users"
+          var params = [];
+          return await db_all(sql, params);
+         }
 
+
+exports.getAllUsers = getAllUsers;
+exports.getAllUsersByRole = getAllUsersByRole;
+exports.getUserByPasscode = getUserByPasscode;
+exports.Role = Role;
 
 
 

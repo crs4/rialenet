@@ -3,6 +3,7 @@ const express = require('express')
 const session = require("express-session");
 const wenet_config = require("./wenet_config");
 const dbConnector = require("./db/db_connector");
+const wenetConnector = require("./wenet/wenet_api");
 
 const path = require('path');
 const PORT = process.env.PORT || 3333
@@ -48,7 +49,7 @@ app.use(session({
 
 
 app.get('/db', async (req, res) => {
-  const data = await dbConnector.getUserByPasscode("");
+  const data = await dbConnector.getAllUsersByRole(dbConnector.Role.student);
   res.send(data);
 });
 
@@ -92,40 +93,21 @@ app.get('/callback', async (req, res) => {
 
 app.get('/tasks', async (req, res) => {
   const passcode = req.query.passcode;
+  /*
   if (req.session.passcode!=passcode)
   {
     console.log("Passcode dell'utente non coincide con quello di sessione!");
     res.status(401).send([]);
   }
   else
+  */
   {
-    const result = await getAllTasks(req.session.tokens)
+    const result = await wenetConnector.getAllTasks(req.session.tokens)
     res.send(result)
   }
   
 })
 
-const getAllTasks = async (tokens) => {
-  console.log(`Richiamo getAllTasks() con accessToken:${tokens.access_token}`);
-  const url = `${WENET_URL}/prod/api/service/tasks?appId=${APP_ID}`
-  try {
-    const response = await
-      fetch(url, {
-        headers: {
-          "Authorization": `bearer ${tokens.access_token}`,
-          "Content-Type": "application/json"
-        },
-        method: "GET",
-      })
-    const details = await response.json()
-    //console.log("GET TASKS RESPONSE:", details)
-    return details
-  } catch (e) {
-    console.log("error from server in getTasks:", e)
-    return `Error:${e}`
-  }
-
-}
 
 app.post('/newtask', async (req, res) => {
   console.log("Request body content->>", req.body["content"])

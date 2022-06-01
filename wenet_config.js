@@ -1,8 +1,7 @@
 //https://stackoverflow.com/questions/3922994/share-variables-between-files-in-node-js
 
 module.exports = {
-  users: { "WQBLLIZQ": { "wenet_id": 631 },
-           "AAAAAAAA": { "wenet_id": 528 }},
+  DBSOURCE: "db/rialenet.sqlite",
   CLIENT_SECRET : "Ayj0D6wWRiN9QdKqkVof",
   APP_ID : "xUi1mwCJ0X",
   CLIENT_ID : "xUi1mwCJ0X",

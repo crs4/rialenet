@@ -6,6 +6,7 @@ const session = require("express-session");
 const wenet_config = require("./wenet_config");
 const dbConnector = require("./db/db_connector");
 const wenetConnector = require("./wenet/wenet_api");
+const md5 = require('md5');
 
 const path = require('path');
 const PORT = process.env.PORT || 3333
@@ -50,9 +51,13 @@ app.get('/db', async (req, res) => {
   res.send(data);
 });
 
+app.get('/currentSession', async (req, res) => {
+  res.send(req.session.id);
+});
+
 app.get('/logout', async (req, res) => {
   console.log("Logout: deleting session data of current user")
-  req.session.destroy((err)=>{console.log("Risultato della rimozione della sessione:",err)})
+  req.session.destroy((err)=>{console.log("Risultato della rimozione della sessione: Errori presenti? ",err)})
   res.redirect("/")
 });
 
@@ -96,7 +101,7 @@ app.get('/callback', async (req, res) => {
   req.session.tokens = tokens;
   console.log("ACCESS TOKEN RICAVATO!");
   //res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/complete?app_id=${APP_ID}`)
-  return res.redirect(`/forum?passcode=${passcode}`);
+  return res.redirect(`/forum?passcode=${md5(passcode)}`);
 })
 
 

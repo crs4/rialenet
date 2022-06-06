@@ -50,19 +50,32 @@ app.get('/db', async (req, res) => {
   res.send(data);
 });
 
+app.get('/logout', async (req, res) => {
+  console.log("Logout: deleting session data of current user")
+  req.session.destroy((err)=>{console.log("Risultato della rimozione della sessione:",err)})
+  res.redirect("/")
+});
+
 app.get('/connect', async (req, res) => {
   const passcode = req.query.passcode;
+  console.log("Richiesta connect su sessione:", req.session.id)
   console.log("connect-to_wenet request (per ottenere authcode (ed external_id)) da passcode:",passcode);
   const user = await dbConnector.getUserByPasscode(passcode)
   console.log("User->",user);
   const external_id = (user!= null && user.length>0) ? user[0]["wenet_id"] : null;
   // session data in express
   //https://stackoverflow.com/questions/47200350/save-data-in-express-session
-  let sessData = req.session;
-  sessData.passcode = passcode;
-  sessData.external_id = external_id;
-  console.log("Dati di sessione:", sessData);
-  res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/login?client_id=${CLIENT_ID}&external_id=${external_id}`)
+  if (external_id!=null)
+  {
+    let sessData = req.session;
+    console.log("Dati di sessione prima:", sessData);
+    sessData.passcode = passcode;
+    sessData.external_id = external_id;
+    console.log("Dati di sessione dopo:", sessData);
+    res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/login?client_id=${CLIENT_ID}&external_id=${external_id}`)
+  }
+  else res.redirect("/");
+
 })
 
 app.get('/conversational_callback', async (req, res) => {
@@ -73,6 +86,7 @@ app.get('/callback', async (req, res) => {
   /**
    * callback di autenticazione
    */
+  console.log("callback di autenticazione:", res.query);
   const code = req.query.code
   const passcode = req.session.passcode
   //const externalId = req.query.external_id
@@ -87,11 +101,12 @@ app.get('/callback', async (req, res) => {
 
 
 app.get('/tasks', async (req, res) => {
+  console.log("Richiesta tasks su sessione:", req.session.id)
   const passcode = req.query.passcode;
    
-  if (req.session.passcode!=passcode)
+  if (req.session.passcode==null)
   {
-    console.log("Passcode dell'utente non coincide con quello di sessione!");
+    console.log("Passcode dell'utente non è presente tra quelli di sessione!");
     res.status(401).send([]);
   }
   else
@@ -112,7 +127,7 @@ app.post('/newtask', async (req, res) => {
 
 
 app.get('/*', function (req, res) {
-  console.log("Root called!!!!")
+  console.log("Root called. Session ID:", req.session.id);
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 

@@ -31,6 +31,27 @@ const getAllTasks = async (tokens) => {
     }
   }
 
+  const getUserProfile = async (wenetUserId,tokens) => {
+    console.log(`Richiamo getUserProfile() con accessToken:${tokens.access_token}`);
+    const url = `${WENET_URL}/prod/api/service/user/profile/${wenetUserId}`
+    try {
+      const response = await
+        fetch(url, {
+          headers: {
+            "Authorization": `bearer ${tokens.access_token}`,
+            "Content-Type": "application/json"
+          },
+          method: "GET",
+        })
+      const details = await response.json()
+      //console.log("GET TASKS RESPONSE:", details)
+      return details
+    } catch (e) {
+      console.log("error from server in getUserProfile:", e)
+      return `Error:${e}`
+    }
+  }
+
   const createNewTask = async (tokens,external_id,content) => {
     const url = `${WENET_URL}/prod/api/service/task`
     //console.log("requestTokenDetails: Tokens:", tokens);
@@ -106,5 +127,6 @@ const getAllTasks = async (tokens) => {
 
   
  exports.getAllTasks = getAllTasks;
+ exports.getUserProfile = getUserProfile;
  exports.createNewTask = createNewTask;
  exports.requestToken = requestToken;

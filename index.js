@@ -104,6 +104,10 @@ app.get('/callback', async (req, res) => {
   return res.redirect(`/forum?passcode=${md5(passcode)}`);
 })
 
+app.get('/userprofile', async (req, res) => {
+  const result = await wenetConnector.getAllTasks(req.query.id,req.session.tokens)
+  res.send(result)
+})
 
 app.get('/tasks', async (req, res) => {
   console.log("Richiesta tasks su sessione:", req.session.id)
@@ -111,7 +115,7 @@ app.get('/tasks', async (req, res) => {
    
   if (req.session.passcode==null)
   {
-    console.log("Passcode dell'utente non è presente tra quelli di sessione!");
+    console.log("Passcode dell'utente non corrisponde a quello di sessione");
     res.status(401).send([]);
   }
   else

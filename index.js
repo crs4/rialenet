@@ -105,7 +105,7 @@ app.get('/callback', async (req, res) => {
 })
 
 app.get('/userprofile', async (req, res) => {
-  const result = await wenetConnector.getAllTasks(req.query.id,req.session.tokens)
+  const result = await wenetConnector.getUserProfile(req.query.id,req.session.tokens)
   res.send(result)
 })
 

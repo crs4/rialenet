@@ -23,7 +23,7 @@ const getAllTasks = async (tokens) => {
           method: "GET",
         })
       const details = await response.json()
-      //console.log("GET TASKS RESPONSE:", details)
+      console.log("GET TASKS RESPONSE:", details)
       return details
     } catch (e) {
       console.log("error from server in getTasks:", e)

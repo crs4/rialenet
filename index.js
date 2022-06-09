@@ -52,7 +52,7 @@ app.get('/db', async (req, res) => {
 });
 
 app.get('/currentSession', async (req, res) => {
-  res.send(req.session.id);
+  res.send(req.session);
 });
 
 app.get('/logout', async (req, res) => {

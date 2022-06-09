@@ -76,7 +76,7 @@ app.get('/connect', async (req, res) => {
     console.log("Dati di sessione prima:", sessData);
     sessData.passcode = passcode;
     sessData.external_id = external_id;
-    sessData.role_id = user!=null ? user["role_id"] : null;
+    sessData.role_id = user[0]["role_id"];
     console.log("Dati di sessione dopo:", sessData);
     res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/login?client_id=${CLIENT_ID}&external_id=${external_id}`)
   }

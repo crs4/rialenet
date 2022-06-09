@@ -76,6 +76,7 @@ app.get('/connect', async (req, res) => {
     console.log("Dati di sessione prima:", sessData);
     sessData.passcode = passcode;
     sessData.external_id = external_id;
+    sessData.role_id = user!=null ? user["role_id"] : null;
     console.log("Dati di sessione dopo:", sessData);
     res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/login?client_id=${CLIENT_ID}&external_id=${external_id}`)
   }
@@ -106,7 +107,10 @@ app.get('/callback', async (req, res) => {
 
 app.get('/userprofile', async (req, res) => {
   let result = await wenetConnector.getUserProfile(req.session.external_id,req.session.tokens)
-  if (result!=null) result["passcode"] = req.session.passcode;
+  if (result!=null) {
+    result["passcode"] = req.session.passcode;
+    result["role_id"] = req.session.role_id;
+}
   //{"name":{"first":"Stefano","last":"Monni"},"id":"528","avatar":null}
   res.send(result)
 })

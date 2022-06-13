@@ -53,7 +53,7 @@ const getAllTasks = async (tokens) => {
   }
 
   const getAppUsers = async (tokens) => {
-    console.log(`Richiamo getUserProfile() con accessToken:${tokens.access_token}`);
+    console.log(`Richiamo getAppUsers() con accessToken:${tokens.access_token}`);
     const url = `${WENET_URL}/prod/api/service/app/${APP_ID}/users`
     try {
       const response = await

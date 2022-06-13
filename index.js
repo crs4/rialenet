@@ -117,6 +117,17 @@ app.get('/userprofile', async (req, res) => {
   res.send(result)
 })
 
+app.get('/users', async (req, res) => {
+  const wenet_id = req.query.id;
+  let result = await wenetConnector.getAppUsers(req.session.tokens)
+  if (result!=null) {
+    result["passcode"] = req.session.passcode;
+    result["role_id"] = req.session.role_id;
+}
+  //{"name":{"first":"Stefano","last":"Monni"},"id":"528","avatar":null}
+  res.send(result)
+})
+
 app.get('/tasks', async (req, res) => {
   console.log("Richiesta tasks su sessione:", req.session.id)
   const passcode = req.query.passcode;

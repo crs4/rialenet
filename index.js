@@ -1,4 +1,5 @@
 //https://rialenet-forum.herokuapp.com
+//https://swagger.u-hopper.com/?url=https://raw.githubusercontent.com/InternetOfUs/components-documentation/master/sources/wenet-service_api-openapi.yaml
 
 const fetch = require("node-fetch");
 const express = require('express')
@@ -106,7 +107,8 @@ app.get('/callback', async (req, res) => {
 })
 
 app.get('/userprofile', async (req, res) => {
-  let result = await wenetConnector.getUserProfile(req.session.external_id,req.session.tokens)
+  const wenet_id = req.query.id;
+  let result = await wenetConnector.getUserProfile(wenet_id || req.session.external_id,req.session.tokens)
   if (result!=null) {
     result["passcode"] = req.session.passcode;
     result["role_id"] = req.session.role_id;

@@ -103,8 +103,8 @@ const getAllTasks = async (tokens) => {
         "communityId": COMMUNITY_ID,    //"624594390e5af47df0eed5ea",
         "requesterId": external_id, //"528",
         "goal": {
-          "name": "Help 4 for timeline master",
-          "description": `${content}`,
+          "name": `${content["name"]}`,
+          "description": `${content["description"]}`,
           "keywords": [
             "social interaction",
             "lab"

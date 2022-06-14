@@ -148,6 +148,7 @@ app.get('/tasks', async (req, res) => {
 
 
 app.post('/newtask', async (req, res) => {
+  console.log("Request body:", req.body);
   console.log("Request body content->>", req.body["content"])
   const result = await wenetConnector.createNewTask(req.session.tokens,req.session.external_id,req.body["content"])
   res.send(`result di newTask:${result}`)

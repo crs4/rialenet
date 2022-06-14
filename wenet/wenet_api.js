@@ -79,7 +79,7 @@ const getAllTasks = async (tokens) => {
     try {
       const taskBody = createTaskBody(external_id,content);
       console.log("NEW TASK BODY:", taskBody);
-      
+
       const response = await
         fetch(url, {
           headers: {
@@ -101,10 +101,10 @@ const getAllTasks = async (tokens) => {
   const createTaskBody = (external_id,content) => {
     return (
       {
-        "taskTypeId": TASK_TYPE_ID, //  "626a6745925841535833b638",
-        "appId": APP_ID, //"GOJt2zQA6B",
-        "communityId": COMMUNITY_ID,    //"624594390e5af47df0eed5ea",
-        "requesterId": external_id, //"528",
+        "taskTypeId": `${TASK_TYPE_ID}`, //  "626a6745925841535833b638",
+        "appId": `${APP_ID}`, //"GOJt2zQA6B",
+        "communityId": `${COMMUNITY_ID}`,    //"624594390e5af47df0eed5ea",
+        "requesterId": `${external_id}`, //"528",
         "goal": {
           "name": `${content["name"]}`,
           "description": `${content["description"]}`,

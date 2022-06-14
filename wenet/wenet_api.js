@@ -77,6 +77,9 @@ const getAllTasks = async (tokens) => {
     //console.log("requestTokenDetails: Tokens:", tokens);
     //console.log("requestTokenDetails: Access Token:", tokens.access_token)
     try {
+      const taskBody = createTaskBody(external_id,content);
+      console.log("NEW TASK BODY:", taskBody);
+      
       const response = await
         fetch(url, {
           headers: {
@@ -84,7 +87,7 @@ const getAllTasks = async (tokens) => {
             "Content-Type": "application/json"
           },
           method: "POST",
-          body: JSON.stringify(createTaskBody(external_id,content))
+          body: JSON.stringify(taskBody)
         })
       const details = await response.json()
       console.log("CREATE TASK RESPONSE:", details)

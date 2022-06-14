@@ -8,7 +8,7 @@ const wenet_config = require("./wenet_config");
 const dbConnector = require("./db/db_connector");
 const wenetConnector = require("./wenet/wenet_api");
 const md5 = require('md5');
-
+const bodyParser = require('body-parser');
 const path = require('path');
 const PORT = process.env.PORT || 3333
 //https://levelup.gitconnected.com/how-to-render-react-app-using-express-server-in-node-js-a428ec4dfe2b
@@ -30,6 +30,9 @@ var SQLiteStore = require('connect-sqlite3')(session);
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.raw());
 
 /*
 //http://expressjs.com/en/resources/middleware/session.html

@@ -139,7 +139,7 @@ app.get('/tasks', async (req, res) => {
   // i task che interessano al docente sono i propri, quelli che interessano
   // allo studente sono quelli del docente ad esso assegnato.
   // 
-  const requesterId = req.session.teacher_wenet_id || teacher_external_id; // || req.query.requesterId;
+  const requesterId = req.session.teacher_wenet_id || req.session.external_id; // || req.query.requesterId;
   if (requesterId==null)
   {
     console.log("L'utente loggato non risulta nè un docente nè uno studente con un docente ad esso associato");

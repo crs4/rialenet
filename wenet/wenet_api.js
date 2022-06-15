@@ -9,10 +9,12 @@ const CLIENT_SECRET = wenet_config.CLIENT_SECRET
 const COMMUNITY_ID = wenet_config.COMMUNITY_ID
 const TASK_TYPE_ID =  wenet_config.TASK_TYPE_ID //da connettore conversazionale/App logic
 
-
-const getAllTasks = async (tokens) => {
+//https://swagger.u-hopper.com/?url=https://raw.githubusercontent.com/InternetOfUs/components-documentation/master/sources/wenet-service_api-openapi.yaml#/Task/get_tasks
+const getAllTasks = async (tokens, goalName, requesterId) => {
     console.log(`Richiamo getAllTasks() con accessToken:${tokens.access_token}`);
-    const url = `${WENET_URL}/prod/api/service/tasks?appId=${APP_ID}`
+    let url = `${WENET_URL}/prod/api/service/tasks?appId=${APP_ID}`
+    if (goalName!=null) url +=`&goalName=${goalName}`;
+    if (requesterId!=null) url+=`&requesterId=${requesterId}`;
     try {
       const response = await
         fetch(url, {

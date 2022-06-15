@@ -134,7 +134,8 @@ app.get('/users', async (req, res) => {
 app.get('/tasks', async (req, res) => {
   console.log("Richiesta tasks su sessione:", req.session.id)
   const passcode = req.query.passcode;
-   
+  const goalName = req.query.goalName;
+  const requesterId = req.query.requesterId;
   if (req.session.passcode==null)
   {
     console.log("Passcode dell'utente non corrisponde a quello di sessione");
@@ -143,7 +144,7 @@ app.get('/tasks', async (req, res) => {
   else
    
   {
-    const result = await wenetConnector.getAllTasks(req.session.tokens)
+    const result = await wenetConnector.getAllTasks(req.session.tokens, goalName,requesterId)
     res.send(result)
   }
   

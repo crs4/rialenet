@@ -79,8 +79,9 @@ app.get('/connect', async (req, res) => {
     let sessData = req.session;
     console.log("Dati di sessione prima:", sessData);
     sessData.passcode = passcode;
-    sessData.external_id = external_id;
+    sessData.external_id = external_id; // the wenet id of authenticated user
     sessData.role_id = user[0]["role_id"];
+    sessData.teacher_wenet_id = user[0]["teacher_wenet_id"];
     console.log("Dati di sessione dopo:", sessData);
     res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/login?client_id=${CLIENT_ID}&external_id=${457845}`)
   }
@@ -133,18 +134,20 @@ app.get('/users', async (req, res) => {
 
 app.get('/tasks', async (req, res) => {
   console.log("Richiesta tasks su sessione:", req.session.id)
-  const passcode = req.query.passcode;
+  //const passcode = req.query.passcode;
   const goalName = req.query.goalName;
-  const requesterId = req.query.requesterId;
-  if (req.session.passcode==null)
+  // i task che interessano al docente sono i propri, quelli che interessano
+  // allo studente sono quelli del docente ad esso assegnato.
+  // 
+  const requesterId = req.session.teacher_wenet_id || teacher_external_id; // || req.query.requesterId;
+  if (requesterId==null)
   {
-    console.log("Passcode dell'utente non corrisponde a quello di sessione");
+    console.log("L'utente loggato non risulta nè un docente nè uno studente con un docente ad esso associato");
     res.status(401).send([]);
   }
   else
-   
   {
-    const result = await wenetConnector.getAllTasks(req.session.tokens, goalName,requesterId)
+    const result = await wenetConnector.getTasks(req.session.tokens, goalName,requesterId)
     res.send(result)
   }
   

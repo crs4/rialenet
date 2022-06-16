@@ -164,9 +164,10 @@ app.post('/newtask', async (req, res) => {
 app.post('/newtransaction', async (req, res) => {
   console.log("Request body:", req.body);
   console.log("Request body content->>", req.body["content"]) 
+  const bodyContent = req.body["content"];
   //tokens, task_id, external_id,content
   const result = await wenetConnector.createNewTransaction(req.session.tokens,
-                      req.body["taskId"],req.session.external_id,req.body["content"])
+                      bodyContent["taskId"],req.session.external_id,bodyContent["content"])
   res.send(`result di newTransaction:${result}`)
 })
 

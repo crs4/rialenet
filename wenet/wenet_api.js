@@ -150,9 +150,9 @@ const getTasks = async (tokens, goalName, requesterId) => {
 
 const createTransactionBody = (taskId, external_id,content) =>
 { 
-  const attrib = transactionFieldMapper[`${content["label"]}`]
+  const attrib = transactionFieldMapper.transactionFieldMapper[`${content["label"]}`]
   console.log("transactionFieldMapper:", transactionFieldMapper);
-  console.log("transactionFieldMapper label:", transactionFieldMapper[`${content["label"]}`]);
+  console.log("transactionFieldMapper label:", attrib);
   return (
   {
     "_creationTs": moment.now(),

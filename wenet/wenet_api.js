@@ -1,6 +1,7 @@
 const moment = require("moment");
 const wenet_config = require("../wenet_config");
 const fetch = require("node-fetch");
+const transactionFieldMapper = require("./transactions_model")
 
 const WENET_URL = wenet_config.WENET_URL
 const APP_ID = wenet_config.APP_ID
@@ -148,14 +149,17 @@ const getTasks = async (tokens, goalName, requesterId) => {
   }
 
 const createTransactionBody = (taskId, external_id,content) =>
-{ return (
+{ 
+  const attrib = transactionFieldMapper[`${content["label"]}`]
+  
+  return (
   {
     "_creationTs": moment.now(),
     "_lastUpdateTs": moment.now(),
     "taskId":  `${taskId}`,
     "label":   `${content["label"]}`, // "cannotAnswer",
     "attributes": {
-        "reason": `${content["message"]}`
+        [attrib] : `${content["message"]}`
     },
     "actioneerId": `${external_id}`,
     "messages": []

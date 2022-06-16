@@ -121,6 +121,49 @@ const getTasks = async (tokens, goalName, requesterId) => {
   }
 
 
+  const createNewTransaction = async (tokens,task_id, external_id,content) => {
+    const url = `${WENET_URL}/prod/api/service/task/transaction`
+    //console.log("requestTokenDetails: Tokens:", tokens);
+    //console.log("requestTokenDetails: Access Token:", tokens.access_token)
+    try {
+      const transactionBody = createTransactionBody(task_id,external_id,content);
+      console.log("NEW TRANSACTION BODY:", transactionBody);
+
+      const response = await
+        fetch(url, {
+          headers: {
+            "Authorization": `bearer ${tokens.access_token}`,
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify(transactionBody)
+        })
+      const details = await response.json()
+      console.log("CREATE TRANSACTION RESPONSE:", details)
+      return details
+    } catch (e) {
+      console.log("error from server in createTransaction:", e)
+      return `Error:${e}`
+    }
+  }
+
+const createTransactionBody = (taskId, external_id,content) =>
+{ return (
+  {
+    "_creationTs": moment.now(),
+    "_lastUpdateTs": moment.now(),
+    "taskId":  `${taskId}`,
+    "label":   `${content["label"]}`, // "cannotAnswer",
+    "attributes": {
+        "reason": `${content["message"]}`
+    },
+    "actioneerId": `${external_id}`,
+    "messages": []
+ }
+)
+ 
+}
+
   const requestToken = async (oauthCode) => {
     try {
       const response = await
@@ -156,4 +199,5 @@ const getTasks = async (tokens, goalName, requesterId) => {
  exports.getAppUsers = getAppUsers;
  exports.getUserProfile = getUserProfile;
  exports.createNewTask = createNewTask;
+ exports.createNewTransaction = createNewTransaction;
  exports.requestToken = requestToken;

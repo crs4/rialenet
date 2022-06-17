@@ -1,11 +1,25 @@
+
+//https://github.com/InternetOfUs/components-documentation
+ const c = {
+    "comment_on_cannotAnswer" : "inserisci un commento",
+    "comment_on_needClarification" : "Inserisci un commento",
+    "comment_on_notSure" : "Inserisci un commento",
+    "comment_on_myAnswer" : "Inserisci la risposta",
+    "comment_on_goToAttachment" : "Inserisci il nome dell'allegato",
+    "comment_on_goToTimelinePosition" : "Inserisci il link alla timeline",
+    "comment_on_goToTag" : "Inserisci il nome del Tag"
+ }
+
+
+""
 const transactionFieldMapper = {
-"cannotAnswer" : "note",
-"needClarification" : "note" ,
-"notSure" : "note",
-"myAnswer" : "answer",
-"goToAttachment": "attachment",
-"goToTimelinePosition" :  "timelineLink",
-"goToTag" : "tag"
+    "cannotAnswer": "note",
+    "needClarification": "note",
+    "notSure": "note",
+    "myAnswer": "answer",
+    "goToAttachment": "attachment",
+    "goToTimelinePosition": "timelineLink",
+    "goToTag": "tag"
 }
 
 exports.transactionFieldMapper = transactionFieldMapper;
@@ -97,4 +111,16 @@ const model = {
 }
 
 
-
+const logNorms = [{ "description": null, 
+"whenever": "is_received_created_task() and get_profile_id(Me)", 
+"thenceforth": "add_message_task() and send_message(Me,'log',Content) and send_user_message('log',json([label='task']))", 
+"ontology": null },
+{ "description": null, 
+"whenever": "is_received_do_transaction('log',Content) and get_profile_id(Me)", 
+"thenceforth": "add_message_transaction() and send_message(Me,'log',Content) and send_user_message('log',json([label='transaction']))", 
+"ontology": null }, 
+{ "description": null, 
+"whenever": "is_received(_,'log',Content) and get_task_id(TaskId) and get_attribute(Message,message,@(null),Content)", 
+"thenceforth": 
+"send_user_message('log',json([label='lll',taskId=TaskId,message=Message]))", 
+"ontology": null }]

@@ -1,0 +1,48 @@
+{
+    "offset": 0,
+    "total": 2,
+    "tasks": [
+        {
+            "id": "62a9ff27925841535833b6a1",
+            "_creationTs": 1655308072,
+            "_lastUpdateTs": 1655308072,
+            "taskTypeId": "62a87b53925841535833b69d",
+            "requesterId": "671",
+            "appId": "xUi1mwCJ0X",
+            "goal": {
+                "name": "Primo Task rivolto allo studente Pantera assonnata",
+                "description": "Descrizione del primo Task rivolto allo studente Pantera assonnata",
+                "keywords": [
+                    "social interaction",
+                    "lab"
+                ]
+            },
+            "norms": [],
+            "attributes": {},
+            "closeTs": null,
+            "communityId": "624703620e5af47df0eed5eb",
+            "transactions": []
+        },
+        {
+            "id": "62aa04a3925841535833b6a2",
+            "_creationTs": 1655309475,
+            "_lastUpdateTs": 1655309475,
+            "taskTypeId": "62a87b53925841535833b69d",
+            "requesterId": "671",
+            "appId": "xUi1mwCJ0X",
+            "goal": {
+                "name": "Secondo Task da Lupo Solitario a Pantera assonnata",
+                "description": "Descrizione del Secondo Task da Lupo Solitario a Pantera assonnata",
+                "keywords": [
+                    "social interaction",
+                    "lab"
+                ]
+            },
+            "norms": [],
+            "attributes": {},
+            "closeTs": null,
+            "communityId": "624703620e5af47df0eed5eb",
+            "transactions": []
+        }
+    ]
+}

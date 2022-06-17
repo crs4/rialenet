@@ -20,6 +20,8 @@ const getTasks = async (tokens, goalName, requesterId) => {
 
     if (goalName!=null) url +=`&goalName=${goalName}`;
     if (requesterId!=null) url+=`&requesterId=${requesterId}`;
+
+    console.log("getTasks() url:", url);
     try {
       const response = await
         fetch(url, {

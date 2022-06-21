@@ -146,6 +146,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
         })
       const details = await response.json()
       console.log("CREATE TRANSACTION RESPONSE:", details)
+      console.log("CREATE TRANSACTION RESPONSE STATUS CODE:", response.status)
       return details
     } catch (e) {
       console.log("error from server in createTransaction:", e)

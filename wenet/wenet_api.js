@@ -161,11 +161,12 @@ const createTransactionBody = (taskId, external_id,content) =>
   console.log("transactionFieldMapper label:", attrib);
   return (
   {
-    
+    "_creationTs": moment.now(),
+    "_lastUpdateTs": moment.now(),
     "taskId":  `${taskId}`,
     "label":   `${content["label"]}`, // "cannotAnswer",
     "attributes": {
-        [attrib] : `${content["message"]}`
+        "note" : `${content["message"]}`
     },
     "actioneerId": `${external_id}`,
     "messages": []

@@ -132,6 +132,11 @@ app.get('/users', async (req, res) => {
   res.send(result)
 })
 
+app.get('/students', async (req, res) => {
+  let result = await dbConnector.getStudentsProfileByTeacherWenetId(req.session.external_id)
+ res.send(result)
+})
+
 app.get('/tasks', async (req, res) => {
   console.log("Richiesta tasks su sessione:", req.session.id)
   //const passcode = req.query.passcode;

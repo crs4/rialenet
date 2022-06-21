@@ -54,6 +54,18 @@ const getUserByPasscode = async (passcode) =>
        return await db_all(sql, params);
       }
 
+    const getStudentsProfileByTeacherWenetId = async (teacherWenetId) =>
+    {
+        var sql = "SELECT passcode,name,surname, wenet_id, id, description, teacher_wenet_id" +
+        " FROM users LEFT JOIN profiles WHERE users.student_profile_id=profiles.id" + 
+        " AND teacher_wenet_id=?"
+        var params = [teacherWenetId];
+        return await db_all(sql, params);
+        }
+
+    
+    
+
     const getAllUsers = async () =>
       {
           var sql = "SELECT * FROM users"
@@ -65,6 +77,7 @@ const getUserByPasscode = async (passcode) =>
 exports.getAllUsers = getAllUsers;
 exports.getAllUsersByRole = getAllUsersByRole;
 exports.getUserByPasscode = getUserByPasscode;
+exports.getStudentsProfileByTeacherWenetId = getStudentsProfileByTeacherWenetId;
 exports.Role = Role;
 
 

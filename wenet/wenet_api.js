@@ -165,7 +165,7 @@ const createTransactionBody = (taskId, external_id,content) =>
     "taskId":  `${taskId}`,
     "label":   `${content["label"]}`, // "cannotAnswer",
     "attributes": {
-        [attrib] : `${content["message"]}`
+        [attrib] : JSON.stringify(content["message"])
     },
     "actioneerId": `${external_id}`,
     "messages": []

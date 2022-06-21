@@ -162,10 +162,10 @@ const createTransactionBody = (taskId, external_id,content) =>
   {
     "_creationTs": moment.now(),
     "_lastUpdateTs": moment.now(),
-    "taskId":  `${taskId}`,
+    "taskId":  `${taskId}AAAAA`,
     "label":   `${content["label"]}`, // "cannotAnswer",
     "attributes": {
-        [attrib] : JSON.stringify(content["message"])
+        [attrib] : `${content["message"]}`
     },
     "actioneerId": `${external_id}`,
     "messages": []

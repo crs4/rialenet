@@ -136,6 +136,9 @@ const model = {
         "title": "The teacher gives the reference to an attachment the user should watch.",
         "type": "object",
         "properties": {
+            "transactionId" : {
+                "description" : "The id of the transaction this one is referred to"
+            },
             "attachment": {
                 "description": "The attachment name",
                 "type": "string",
@@ -148,6 +151,9 @@ const model = {
         "title": "The teacher gives the time reference in the Timeline at the position the user should watch.",
         "type": "object",
         "properties": {
+            "transactionId" : {
+                "description" : "The id of the transaction this one is referred to"
+            },
             "timelineLink": {
                 "description": "The Timeline link",
                 "type": "string",
@@ -160,6 +166,9 @@ const model = {
         "title": "The teacher gives the reference to a Tag the user should point.",
         "type": "object",
         "properties": {
+            "transactionId" : {
+                "description" : "The id of the transaction this one is referred to"
+            },
             "tag": {
                 "description": "The Tag name",
                 "type": "string",

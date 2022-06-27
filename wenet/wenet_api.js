@@ -132,7 +132,10 @@ const getTasks = async (tokens, goalName, requesterId) => {
     //console.log("requestTokenDetails: Tokens:", tokens);
     //console.log("requestTokenDetails: Access Token:", tokens.access_token)
     try {
-      const transactionBody = createTransactionBody(task_id,external_id,content);
+      const transactionBody = (content["transactionID"]==null ? 
+      createTransactionBody(task_id,external_id,content):
+      createFeedbackTransactionBody(task_id,external_id,content));
+
       console.log("NEW TRANSACTION BODY:", transactionBody);
 
       const response = await
@@ -172,8 +175,29 @@ const createTransactionBody = (taskId, external_id,content) =>
     "messages": []
  }
 )
- 
 }
+
+const createFeedbackTransactionBody = (taskId, external_id,content) =>
+{ 
+  const attrib = transactionFieldMapper.transactionFieldMapper[`${content["label"]}`]
+  console.log("transactionFieldMapper:", transactionFieldMapper);
+  console.log("transactionFieldMapper label:", attrib);
+  return (
+  {
+    "_creationTs": moment.now(),
+    "_lastUpdateTs": moment.now(),
+    "taskId":  `${taskId}`,
+    "label":   `${content["label"]}`, // "cannotAnswer",
+    "attributes": {
+        [attrib] : `${content["message"]}`,
+        "transactionID" : `${content["transactionID"]}`
+    },
+    "actioneerId": `${external_id}`,
+    "messages": []
+ }
+)
+}
+
 
   const requestToken = async (oauthCode) => {
     try {

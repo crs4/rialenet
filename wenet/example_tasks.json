@@ -5,7 +5,7 @@
         {
             "id": "62a9ff27925841535833b6a1",
             "_creationTs": 1655308072,
-            "_lastUpdateTs": 1656326636,
+            "_lastUpdateTs": 1656328149,
             "taskTypeId": "62a87b53925841535833b69d",
             "requesterId": "671",
             "appId": "xUi1mwCJ0X",
@@ -69,6 +69,19 @@
                     "id": "3",
                     "_creationTs": 1656326636,
                     "_lastUpdateTs": 1656326636
+                },
+                {
+                    "taskId": "62a9ff27925841535833b6a1",
+                    "label": "goToTag",
+                    "attributes": {
+                        "tag": "TAG_ESOMA",
+                        "transactionID": "0"
+                    },
+                    "actioneerId": "671",
+                    "messages": [],
+                    "id": "4",
+                    "_creationTs": 1656328149,
+                    "_lastUpdateTs": 1656328149
                 }
             ]
         },

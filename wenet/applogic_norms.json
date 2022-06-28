@@ -43,5 +43,11 @@
         "whenever": "is_received_do_transaction('goToTag',Content) and get_profile_id(Me)",
         "thenceforth": "add_message_transaction() and send_message(Me,'goToTag',Content)",
         "ontology": null
+    },
+    { 
+        "description": null,
+        "whenever": "is_received_do_transaction('rightAnswer',Content) and get_profile_id(Me)",
+        "thenceforth": "add_message_transaction() and send_message(Me,'rightAnswer',Content)",
+        "ontology": null
     }
 ]

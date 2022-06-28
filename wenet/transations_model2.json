@@ -90,5 +90,16 @@
                 "nullable": true
             }
         }
+    },
+    "rightAnswer": {
+        "title": "The teacher informs the student that the answer is correct",
+        "type": "object",
+        "properties": {
+            "message": {
+                "description": "The teacher message",
+                "type": "string",
+                "nullable": true
+            }
+        }
     }
 }

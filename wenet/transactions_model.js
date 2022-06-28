@@ -78,7 +78,8 @@ const transactionFieldMapper = {
     "myAnswer": "answer",
     "goToAttachment": "attachment",
     "goToTimelinePosition": "timelineLink",
-    "goToTag": "tag"
+    "goToTag": "tag",
+    "rightAnswer" : "message"
 }
 
 exports.transactionFieldMapper = transactionFieldMapper;

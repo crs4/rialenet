@@ -95,6 +95,11 @@
         "title": "The teacher informs the student that the answer is correct",
         "type": "object",
         "properties": {
+            "transactionID": {
+                "description": "The id of the transaction this one is referred to",
+                "type": "string",
+                "nullable": true
+            },
             "message": {
                 "description": "The teacher message",
                 "type": "string",

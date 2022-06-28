@@ -72,7 +72,7 @@ const c = {
 
 ""
 const transactionFieldMapper = {
-    "cannotAnswer": "note",
+    "cannotAnswer": "reason",
     "needClarification": "note",
     "notSure": "note",
     "myAnswer": "answer",

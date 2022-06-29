@@ -61,21 +61,20 @@ app.get('/currentSession', async (req, res) => {
 
 app.get('/logout', async (req, res) => {
   console.log("Logout: deleting session data of current user")
-  req.session.destroy((err)=>{console.log("Risultato della rimozione della sessione: Errori presenti? ",err)})
+  req.session.destroy((err) => { console.log("Risultato della rimozione della sessione: Errori presenti? ", err) })
   res.redirect("/")
 });
 
 app.get('/connect', async (req, res) => {
   const passcode = req.query.passcode;
   console.log("Richiesta connect su sessione:", req.session.id)
-  console.log("connect-to_wenet request (per ottenere authcode (ed external_id)) da passcode:",passcode);
+  console.log("connect-to_wenet request (per ottenere authcode (ed external_id)) da passcode:", passcode);
   const user = await dbConnector.getUserByPasscode(passcode)
-  console.log("User->",user);
-  const external_id = (user!= null && user.length>0) ? user[0]["wenet_id"] : null;
+  console.log("User->", user);
+  const external_id = (user != null && user.length > 0) ? user[0]["wenet_id"] : null;
   // session data in express
   //https://stackoverflow.com/questions/47200350/save-data-in-express-session
-  if (external_id!=null)
-  {
+  if (external_id != null) {
     let sessData = req.session;
     console.log("Dati di sessione prima:", sessData);
     sessData.passcode = passcode;
@@ -108,41 +107,41 @@ app.get('/callback', async (req, res) => {
   console.log("ACCESS TOKEN RICAVATO!");
   //res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/complete?app_id=${APP_ID}`)
   //const user = await dbConnector.getUserByPasscode(passcode)
-  let redirectUrl =  null;
-  if (req.session.role_id == dbConnector.Role.student)
-  {redirectUrl = "/student_dashboard"} 
-  else if (req.session.role_id == dbConnector.Role.admin || 
-    req.session.role_id == dbConnector.Role.teacher) 
-    {redirectUrl = "/teacher_dashboard";}
+  let redirectUrl = null;
+  if (req.session.role_id == dbConnector.Role.student) { redirectUrl = "/student_dashboard" }
+  else if (req.session.role_id == dbConnector.Role.admin ||
+    req.session.role_id == dbConnector.Role.teacher) { redirectUrl = "/teacher_dashboard"; }
   console.log("redirectUrl:", redirectUrl);
-  return (redirectUrl!=null ? res.redirect(redirectUrl) : res.status(403).send('Forbidden: Invalid user id'))
+  return (redirectUrl != null ? res.redirect(redirectUrl) : res.status(403).send('Forbidden: Invalid user id'))
 })
 
 app.get('/userprofile', async (req, res) => {
   const wenet_id = req.query.id;
-  let result = await wenetConnector.getUserProfile(wenet_id || req.session.external_id,req.session.tokens)
-  if (result!=null) {
+  let result = await wenetConnector.getUserProfile(wenet_id || req.session.external_id, req.session.tokens)
+  if (result != null) {
+    //{"name":{"first":"Stefano","last":"Monni"},"id":"528","avatar":null}
     result["passcode"] = req.session.passcode;
     result["role_id"] = req.session.role_id;
-}
-  //{"name":{"first":"Stefano","last":"Monni"},"id":"528","avatar":null}
-  res.send(result)
+    res.send(result)
+  }
+  else
+    res.redirect("/");
 })
 
 app.get('/users', async (req, res) => {
   const wenet_id = req.query.id;
   let result = await wenetConnector.getAppUsers(req.session.tokens)
-  if (result!=null) {
+  if (result != null) {
     result["passcode"] = req.session.passcode;
     result["role_id"] = req.session.role_id;
-}
+  }
   //{"name":{"first":"Stefano","last":"Monni"},"id":"528","avatar":null}
   res.send(result)
 })
 
 app.get('/students', async (req, res) => {
   let result = await dbConnector.getStudentsProfileByTeacherWenetId(req.session.external_id)
- res.send(result)
+  res.send(result)
 })
 
 app.get('/tasks', async (req, res) => {
@@ -153,34 +152,32 @@ app.get('/tasks', async (req, res) => {
   // allo studente sono quelli del docente ad esso assegnato.
   // 
   const requesterId = req.session.teacher_wenet_id || req.session.external_id; // || req.query.requesterId;
-  if (requesterId==null)
-  {
+  if (requesterId == null) {
     console.log("L'utente loggato non risulta nè un docente nè uno studente con un docente ad esso associato");
     res.status(401).send([]);
   }
-  else
-  {
-    const result = await wenetConnector.getTasks(req.session.tokens, goalName,requesterId)
+  else {
+    const result = await wenetConnector.getTasks(req.session.tokens, goalName, requesterId)
     res.send(result)
   }
-  
+
 })
 
 
 app.post('/newtask', async (req, res) => {
   console.log("Request body:", req.body);
   console.log("Request body content->>", req.body["content"])
-  const result = await wenetConnector.createNewTask(req.session.tokens,req.session.external_id,req.body["content"])
+  const result = await wenetConnector.createNewTask(req.session.tokens, req.session.external_id, req.body["content"])
   res.send(`result di newTask:${result}`)
 })
 
 app.post('/newtransaction', async (req, res) => {
   console.log("Request body:", req.body);
-  console.log("Request body content->>", req.body["content"]) 
+  console.log("Request body content->>", req.body["content"])
   const bodyContent = req.body["content"];
   //tokens, task_id, external_id,content
   const result = await wenetConnector.createNewTransaction(req.session.tokens,
-                      bodyContent["taskId"],req.session.external_id,bodyContent["content"])
+    bodyContent["taskId"], req.session.external_id, bodyContent["content"])
   res.send(`result di newTransaction:${result}`)
 })
 

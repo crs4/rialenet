@@ -41,6 +41,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
   }
 
   const getUserProfile = async (wenetUserId,tokens) => {
+    if (tokens==null) return null;
     console.log(`Richiamo getUserProfile() con accessToken:${tokens.access_token}`);
     const url = `${WENET_URL}/prod/api/service/user/profile/${wenetUserId}`
     try {
@@ -57,7 +58,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
       return details
     } catch (e) {
       console.log("error from server in getUserProfile:", e)
-      return `Error:${e}`
+      return null;
     }
   }
 

@@ -82,6 +82,29 @@ const getTasks = async (tokens, goalName, requesterId) => {
     }
   }
 
+  const loginToWenet = async (username_or_email, password) => {
+    const url = `${WENET_URL}/prod/hub/frontend/user/login`
+    console.log("Login of user: ", username_or_email);
+    try {
+      const formData = {"username_or_email" : username_or_email, "password" : password}
+      const response = await
+        fetch(url, {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          method: "POST",
+          body: JSON.stringify(formData)
+        })
+      const response = await response.json()
+      console.log("login to wenet response:", response)
+      return response
+    } catch (e) {
+      console.log("error from login to wenet:", e)
+      return null;
+    }
+  }
+
+
   const createNewTask = async (tokens,external_id,content) => {
     const url = `${WENET_URL}/prod/api/service/task`
     //console.log("requestTokenDetails: Tokens:", tokens);
@@ -237,3 +260,4 @@ const createFeedbackTransactionBody = (taskId, external_id,content) =>
  exports.createNewTask = createNewTask;
  exports.createNewTransaction = createNewTransaction;
  exports.requestToken = requestToken;
+ exports.loginToWenet = loginToWenet;

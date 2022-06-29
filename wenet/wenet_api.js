@@ -91,10 +91,10 @@ const getTasks = async (tokens, goalName, requesterId) => {
     try {
       //const formData = {"username_or_email" : username_or_email, "password" : password}
       //https://stackoverflow.com/questions/46640024/how-do-i-post-form-data-with-fetch-api
-      let formData = new FormData();
+      let formData = new URLSearchParams()
       formData.append("username_or_email" , username_or_email);
       formData.append("password" , password);
-      formData.append("rememberMe" , JSON.stringify(["0","1"]));
+      formData.append("rememberMe" , ["0","1"]);
 
       console.log("Login FormData:", formData);
       const response = await

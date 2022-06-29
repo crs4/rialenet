@@ -95,9 +95,9 @@ const getTasks = async (tokens, goalName, requesterId) => {
           method: "POST",
           body: JSON.stringify(formData)
         })
-      const response = await response.json()
-      console.log("login to wenet response:", response)
-      return response
+      const result = await response.json()
+      console.log("login to wenet response:", result)
+      return result
     } catch (e) {
       console.log("error from login to wenet:", e)
       return null;

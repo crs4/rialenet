@@ -95,7 +95,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
       let formData = new formdata.FormData()
       formData.set("username_or_email" , username_or_email);
       formData.set("password" , password);
-      formData.set("rememberMe" , new formdata.Blob(["0","1"]));
+      //formData.set("rememberMe" , new formdata.Blob(["0","1"]));
 
       console.log("Login FormData:", formData);
       const response = await

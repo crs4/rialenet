@@ -94,8 +94,9 @@ const getTasks = async (tokens, goalName, requesterId) => {
       let formData = new FormData();
       formData.append("username_or_email" , username_or_email);
       formData.append("password" , password);
-      formData.append("rememberMe" , "0");
-
+      formData.append("rememberMe[]" , "0");
+      formData.append("rememberMe[]" , "1");
+      
       console.log("Login FormData:", formData);
       const response = await
         fetch(url, {

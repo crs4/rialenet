@@ -62,6 +62,7 @@ app.get('/currentSession', async (req, res) => {
 app.get('/logout', async (req, res) => {
   console.log("Logout: deleting session data of current user")
   req.session.destroy((err) => { console.log("Risultato della rimozione della sessione: Errori presenti? ", err) })
+  res.status(200).send("ok");
   res.redirect("/")
 });
 

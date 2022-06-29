@@ -2,6 +2,7 @@ const moment = require("moment");
 const wenet_config = require("../wenet_config");
 const fetch = require("node-fetch");
 const transactionFieldMapper = require("./transactions_model")
+const FormData = require("form-data")
 
 const WENET_URL = wenet_config.WENET_URL
 const APP_ID = wenet_config.APP_ID

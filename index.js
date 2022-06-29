@@ -87,8 +87,8 @@ app.get('/connect', async (req, res) => {
     // login the user toWenet first
     const password = "Ri@leNet!"
     const username_or_email = `edutech.crs4+${passcode}@gmail.com`
-    const response = wenetConnector.loginToWenet(username_or_email,password);
-    
+    const response = await wenetConnector.loginToWenet(username_or_email,password);
+    console.log("Risultato del login:", response);
     res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/login?client_id=${CLIENT_ID}&external_id=${external_id}`)
   }
   else res.redirect("/");

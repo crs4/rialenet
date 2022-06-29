@@ -118,6 +118,7 @@ app.get('/callback', async (req, res) => {
 app.get('/userprofile', async (req, res) => {
   const wenet_id = req.query.id;
   let result = await wenetConnector.getUserProfile(wenet_id || req.session.external_id, req.session.tokens)
+  console.log("/userprofile result:", result);
   if (result != null) {
     //{"name":{"first":"Stefano","last":"Monni"},"id":"528","avatar":null}
     result["passcode"] = req.session.passcode;

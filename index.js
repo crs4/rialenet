@@ -154,7 +154,7 @@ app.get('/tasks', async (req, res) => {
   const requesterId = req.session.teacher_wenet_id || req.session.external_id; // || req.query.requesterId;
   if (requesterId == null) {
     console.log("L'utente loggato non risulta nè un docente nè uno studente con un docente ad esso associato");
-    res.status(401).send([]);
+    //res.status(401).send([]);
     res.redirect("/");
   }
   else {

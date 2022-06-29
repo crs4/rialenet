@@ -1,0 +1,66 @@
+{
+  "platform_title": "Piattaforma RialeNet",
+  "passcode_enter": "Inserisci il tuo codice utente",
+  "refresh" : "Aggiorna",
+  "new_question" : " Nuova domanda",
+  "comments": "commenti",
+  "public_area": "Area pubblica",
+  "teacher_area": "Area del docente",
+  "student_area": "Area dello studente",
+  "connect_to_wenet": "Clicca qui per accedere",
+  "login": "Login",
+  "logout": "Logout",
+  "selectAnswer": "Seleziona la risposta:",
+  "selectAnswer_done" : "Risposta selezionata",
+  "teacher_selectAnswer":"Risposta selezionata",
+  "enterComment": "Inserisci un tuo commento",
+  "cannotAnswer": "Non so rispondere",
+  "needClarification": "Ho bisogno di chiarimenti",
+  "notSure": "Non sono sicuro della risposta",
+  "myAnswer": "Sono in grado di rispondere",
+  "teacherFeedback": "Feedback del docente",
+  "send" : "Invia",
+  
+
+  "teacherCreateNewTask": "Nuova domanda",
+  "teacherTaskTitle": "Titolo",
+  "teacherTaskDescription": "Descrizione",
+
+  "goToAttachment": "Vai all'allegato della timeline...",
+  "goToTimelinePosition": "Vai alla timeline alla posizione...",
+  "goToTag": "Vai al tag...",
+  "rightAnswer" : "Risposta esatta",
+
+  "comment_on_cannotAnswer" : "inserisci un commento",
+  "comment_on_cannotAnswer_done" : "Commento",
+  "comment_on_needClarification" : "Inserisci un commento",
+  "comment_on_needClarification_done" : "Commento",
+  "comment_on_notSure" : "Inserisci un commento",
+  "comment_on_notSure_done" : "Commento",
+  "comment_on_myAnswer" : "Inserisci qui la risposta",
+  "comment_on_myAnswer_done" : "Risposta",
+ 
+  "teacher_comment_on_cannotAnswer" : "Commento dello studente",
+  "teacher_comment_on_needClarification" : "Commento dello studente",
+  "teacher_comment_on_notSure" : "Commento dello studente",
+  "teacher_comment_on_myAnswer" : "Risposta dello studente",
+  "teacher_comment_on_goToAttachment" : "Inserisci qui il nome dell'allegato",
+  "teacher_comment_on_goToTimelinePosition" : "Inserisci qui il link alla timeline",
+  "teacher_comment_on_goToTag" : "Inserisci qui il nome del Tag",
+  "teacher_comment_on_rightAnswer" : "Inserisci un commento (opzionale)",
+
+  "students_answers" : "Risposte degli studenti",
+  "students_profile" : "Profilo degli studenti",
+
+  "name" : "Nome",
+  "surname" : "Cognome",
+  "passcode" : "Codice studente",
+  "description" : "Descrizione",
+  "profile" : "Profilo",
+  "details" : "Dettagli",
+  "answers_and_questions" : "Domande e risposte",
+  "send_feedback_to_student" : "Invia un feedback allo studente",
+
+  "new_messages_from_students" : "nuovi messaggi dagli studenti"
+
+}

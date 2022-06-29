@@ -86,14 +86,16 @@ const getTasks = async (tokens, goalName, requesterId) => {
     const url = `${WENET_URL}/prod/hub/frontend/user/login`
     console.log("Login of user: ", username_or_email);
     try {
-      const formData = {"username_or_email" : username_or_email, "password" : password}
+      //const formData = {"username_or_email" : username_or_email, "password" : password}
+      //https://stackoverflow.com/questions/46640024/how-do-i-post-form-data-with-fetch-api
+      let formData = new FormData();
+      formData.append("username_or_email" , username_or_email);
+      formData.append("password" , password);
+
       const response = await
         fetch(url, {
-          headers: {
-            "Content-Type": "application/json"
-          },
           method: "POST",
-          body: JSON.stringify(formData)
+          body: formData
         })
       const result = await response.text()
       console.log("login to wenet response:", result)

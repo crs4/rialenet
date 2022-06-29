@@ -107,7 +107,15 @@ app.get('/callback', async (req, res) => {
   req.session.tokens = tokens;
   console.log("ACCESS TOKEN RICAVATO!");
   //res.redirect(`${WENET_URL}/prod/hub/frontend/oauth/complete?app_id=${APP_ID}`)
-  return res.redirect(`/forum?passcode=${md5(passcode)}`);
+  //const user = await dbConnector.getUserByPasscode(passcode)
+  let redirecturl =  null;
+  if (req.session.role_id == dbConnector.Role.student)
+  {redirecturl = "/student_dashboard"} 
+  else if (req.session.role_id == dbConnector.Role.admin || 
+    req.session.role_id == dbConnector.Role.teacher) 
+    {redirectUrl = "/teacher_dashboard";}
+
+  return (redirectUrl!=null ? res.redirect(redirecturl) : res.status(403).send('Forbidden: Invalid user id'))
 })
 
 app.get('/userprofile', async (req, res) => {

@@ -2,7 +2,8 @@ const moment = require("moment");
 const wenet_config = require("../wenet_config");
 const fetch = require("node-fetch");
 const transactionFieldMapper = require("./transactions_model")
-const FormData = require("form-data");
+//const FormData = require("form-data");
+import {FormData, Blob} from "formdata-node"
 const { findByPlaceholderText } = require("@testing-library/react");
 
 const WENET_URL = wenet_config.WENET_URL
@@ -91,10 +92,10 @@ const getTasks = async (tokens, goalName, requesterId) => {
     try {
       //const formData = {"username_or_email" : username_or_email, "password" : password}
       //https://stackoverflow.com/questions/46640024/how-do-i-post-form-data-with-fetch-api
-      let formData = new URLSearchParams()
-      formData.append("username_or_email" , username_or_email);
-      formData.append("password" , password);
-      formData.append("rememberMe" , JSON.stringify(["0","1"]));
+      let formData = new FormData()
+      formData.set("username_or_email" , username_or_email);
+      formData.set("password" , password);
+      formData.set("rememberMe" , new Blob(["0","1"]));
 
       console.log("Login FormData:", formData);
       const response = await

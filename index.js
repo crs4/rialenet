@@ -155,6 +155,7 @@ app.get('/tasks', async (req, res) => {
   if (requesterId == null) {
     console.log("L'utente loggato non risulta nè un docente nè uno studente con un docente ad esso associato");
     res.status(401).send([]);
+    res.redirect("/");
   }
   else {
     const result = await wenetConnector.getTasks(req.session.tokens, goalName, requesterId)

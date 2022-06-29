@@ -98,9 +98,9 @@ const getTasks = async (tokens, goalName, requesterId) => {
           method: "POST",
           body: formData
         })
-      const result = await response.text()
-      console.log("login to wenet response:", result)
-      return result
+      //const result = await response.text()
+      console.log("login to wenet response:", response)
+      return response
     } catch (e) {
       console.log("error from login to wenet:", e)
       return null;

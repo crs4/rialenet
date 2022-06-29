@@ -2,7 +2,8 @@ const moment = require("moment");
 const wenet_config = require("../wenet_config");
 const fetch = require("node-fetch");
 const transactionFieldMapper = require("./transactions_model")
-const FormData = require("form-data")
+const FormData = require("form-data");
+const { findByPlaceholderText } = require("@testing-library/react");
 
 const WENET_URL = wenet_config.WENET_URL
 const APP_ID = wenet_config.APP_ID
@@ -96,6 +97,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
       const response = await
         fetch(url, {
           method: "POST",
+          headers: formData.getHeaders(),
           body: formData
         })
       //const result = await response.text()

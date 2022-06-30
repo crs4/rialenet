@@ -101,10 +101,12 @@ const getTasks = async (tokens, goalName, requesterId) => {
       wformData.append("password" , password);
       //wformData.set("rememberMe" , new formdata.Blob(["0","1"]));
       console.log("Login FormData:", wformData);
+      //application/x-www-form-urlencoded
+      //multipart/form-data
       const response = await
         fetch(url, {
           method: "POST",
-          headers: {"Content-Type": "multipart/form-data"},
+          headers: {"Content-Type": "application/x-www-form-urlencoded"},
           body: wformData
         })
         console.log("Login response:", response);

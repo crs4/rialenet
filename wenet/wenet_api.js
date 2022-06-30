@@ -86,7 +86,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
   }
 
   const loginToWenet = async (username_or_email, password) => {
-    const url = `${WENET_URL}/prod/hub/frontend/user/login`
+    const url = `${WENET_URL}/prod/hub/frontend/user/login?client_id=xUi1mwCJ0X&external_id=671`
     console.log("Login of user: ", username_or_email);
     console.log("Login url: ", url);
     try {

@@ -2,7 +2,7 @@ const moment = require("moment");
 const wenet_config = require("../wenet_config");
 const fetch = require("node-fetch");
 const transactionFieldMapper = require("./transactions_model")
-//const FormData = require("form-data");
+const FormData = require("form-data");
 const formdata = require("formdata-node")
 const { findByPlaceholderText } = require("@testing-library/react");
 
@@ -95,7 +95,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
       let wformData = new formdata.FormData()
       wformData.set("username_or_email" , username_or_email);
       wformData.set("password" , password);
-      wformData.set("rememberMe" , new formdata.Blob(["0","1"]));
+      //wformData.set("rememberMe" , new formdata.Blob(["0","1"]));
 
       console.log("Login FormData:", wformData);
       const response = await

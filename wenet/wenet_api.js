@@ -100,7 +100,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
       //wformData.set("rememberMe" , new formdata.Blob(["0","1"]));
       wformData.set("LoginForm[rememberMe]" , "0");
       */
-
+      let wformData = new formdata.FormData()
       wformData.set("loginform-username_or_email]" , username_or_email);
       wformData.set("loginform-password" , password);
       //wformData.set("rememberMe" , new formdata.Blob(["0","1"]));

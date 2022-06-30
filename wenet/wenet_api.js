@@ -101,9 +101,9 @@ const getTasks = async (tokens, goalName, requesterId) => {
     */
       
       let wformData = new FormData()
-      wformData.append("username_or_email" , username_or_email);
-      wformData.append("password" , password);
-      wformData.append("rememberMe" , "0");
+      wformData.append("LoginForm[username_or_email]" , username_or_email);
+      wformData.append("LoginForm[password]" , password);
+      wformData.append("LoginForm[rememberMe]" , "0");
       
       console.log("Login FormData:", wformData);
       //application/x-www-form-urlencoded
@@ -111,7 +111,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
       const response = await
         fetch(url, {
           method: "POST",
-          headers: {"Content-Type": "application/x-www-form-urlencoded"},
+          //headers: {"Content-Type": "application/x-www-form-urlencoded"},
           body: wformData
         })
         console.log("Login response:", response);

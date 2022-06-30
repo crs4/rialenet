@@ -101,7 +101,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
       const response = await
         fetch(url, {
           method: "POST",
-          headers: wformData.getHeaders(),
+          headers: {"Content-Type": "multipart/form-data"},
           body: wformData
         })
         console.log("Login response:", response);

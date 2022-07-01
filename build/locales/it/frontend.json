@@ -62,6 +62,9 @@
   "send_feedback_to_student" : "Invia un feedback allo studente",
 
   "new_messages_from_students" : "nuovi messaggi dagli studenti",
-  "completed" : "Completato"
+  "completed" : "Completato",
+  "question_reproposal" : "Riprongo la domanda:",
+  "question_topic" : "Argomento",
+  "question_content" : "Testo della domanda"
 
 }

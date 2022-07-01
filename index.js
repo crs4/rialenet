@@ -138,6 +138,7 @@ app.get('/userprofile', async (req, res) => {
     res.redirect("/");
 })
 
+/*
 app.get('/users', async (req, res) => {
   const wenet_id = req.query.id;
   let result = await wenetConnector.getAppUsers(req.session.tokens)
@@ -148,10 +149,12 @@ app.get('/users', async (req, res) => {
   //{"name":{"first":"Stefano","last":"Monni"},"id":"528","avatar":null}
   res.send(result)
 })
+*/
 
 app.get('/students', async (req, res) => {
-  let result = await dbConnector.getStudentsProfileByTeacherWenetId(req.session.external_id)
-  res.send(result)
+  const students = await dbConnector.getStudentsProfileByTeacherWenetId(req.session.external_id)
+  const wenetStudents = await wenetConnector.getWenetStudents(students,req.session.tokens)
+  res.send(wenetStudents)
 })
 
 app.get('/tasks', async (req, res) => {

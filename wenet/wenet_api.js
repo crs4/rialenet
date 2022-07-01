@@ -65,6 +65,24 @@ const getTasks = async (tokens, goalName, requesterId) => {
     }
   }
 
+  // return only users students that are also wenet users that subscribed the rialenet app
+  const getWenetStudents = async(students, tokens) =>
+  {
+     let wenetUsers = []
+     for (let i=0;i<students.length;i++)
+     {
+       const student = {...students[i]};
+       const studentProfile = await getUserProfile(student["id"],tokens)
+       if (studentProfile!=null && studentProfile["message"]==null)
+       {
+         student["first"]= studentProfile["first"];
+         student["last"]= studentProfile["last"];
+         wenetUsers.push(student);
+       }
+     }
+     return wenetUsers;
+  }
+
   const getAppUsers = async (tokens) => {
     console.log(`Richiamo getAppUsers() con accessToken:${tokens.access_token}`);
     const url = `${WENET_URL}/prod/api/service/app/${APP_ID}/users`
@@ -290,3 +308,4 @@ const createFeedbackTransactionBody = (taskId, external_id,content) =>
  exports.createNewTransaction = createNewTransaction;
  exports.requestToken = requestToken;
  exports.loginToWenet = loginToWenet;
+ exports.getWenetStudents = getWenetStudents;

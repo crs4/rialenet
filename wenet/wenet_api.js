@@ -77,8 +77,8 @@ const getTasks = async (tokens, goalName, requesterId) => {
        console.log("WS: profile wenet studente:", studentProfile);
        if (studentProfile!=null && studentProfile["message"]==null)
        {
-         student["first"]= studentProfile["first"];
-         student["last"]= studentProfile["last"];
+         student["name"]= studentProfile["name"]["first"];
+         student["surname"]= studentProfile["name"]["last"];
          wenetUsers.push(student);
        }
      }

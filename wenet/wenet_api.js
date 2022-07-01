@@ -72,7 +72,9 @@ const getTasks = async (tokens, goalName, requesterId) => {
      for (let i=0;i<students.length;i++)
      {
        const student = {...students[i]};
+       console.log("/n/nWS: analizzo studente:", student);
        const studentProfile = await getUserProfile(student["id"],tokens)
+       console.log("WS: profile wenet studente:", studentProfile);
        if (studentProfile!=null && studentProfile["message"]==null)
        {
          student["first"]= studentProfile["first"];

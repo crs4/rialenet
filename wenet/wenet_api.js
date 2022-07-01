@@ -65,7 +65,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
     }
   }
 
-  // return only users students that are also wenet users that subscribed the rialenet app
+  // return only students that are also wenet users that subscribed the rialenet app
   const getWenetStudents = async(students, tokens) =>
   {
      let wenetUsers = []

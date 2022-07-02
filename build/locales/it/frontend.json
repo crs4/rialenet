@@ -30,6 +30,7 @@
   "goToTimelinePosition": "Vai alla timeline alla posizione...",
   "goToTag": "Vai al tag...",
   "rightAnswer" : "Risposta esatta",
+  "freeAnnotation" : "Annotazione libera",
 
   "comment_on_cannotAnswer" : "inserisci un commento",
   "comment_on_cannotAnswer_done" : "Commento",
@@ -48,6 +49,7 @@
   "teacher_comment_on_goToTimelinePosition" : "Inserisci qui il link alla timeline",
   "teacher_comment_on_goToTag" : "Inserisci qui il nome del Tag",
   "teacher_comment_on_rightAnswer" : "Inserisci un commento (opzionale)",
+  "teacher_comment_on_freeAnnotation" : "Inserisci qui la tua annotazione",
 
   "students_answers" : "Risposte degli studenti",
   "students_profile" : "Profilo degli studenti",

@@ -105,55 +105,7 @@ const getTasks = async (tokens, goalName, requesterId) => {
     }
   }
 
-  const loginToWenet = async (username_or_email, password) => {
-    const url = `${WENET_URL}/prod/hub/frontend/user/login?client_id=xUi1mwCJ0X&external_id=671`
-    console.log("Login of user: ", username_or_email);
-    console.log("Login url: ", url);
-    try {
-      //const formData = {"username_or_email" : username_or_email, "password" : password}
-      //https://stackoverflow.com/questions/46640024/how-do-i-post-form-data-with-fetch-api
-      
-      /*
-      let wformData = new formdata.FormData()
-      wformData.set("LoginForm[username_or_email]" , username_or_email);
-      wformData.set("LoginForm[password]" , password);
-      //wformData.set("rememberMe" , new formdata.Blob(["0","1"]));
-      wformData.set("LoginForm[rememberMe]" , "0");
-      */
-      let wformData = new formdata.FormData()
-      wformData.set("loginform-username_or_email]" , username_or_email);
-      wformData.set("loginform-password" , password);
-      //wformData.set("rememberMe" , new formdata.Blob(["0","1"]));
-      wformData.set("loginform-rememberme" , "0");
-
-
-      /*
-      let wformData = new FormData()
-      wformData.append("LoginForm[username_or_email]" , username_or_email);
-      wformData.append("LoginForm[password]" , password);
-      wformData.append("LoginForm[rememberMe]" , "0");
-      */
-
-      console.log("Login FormData:", wformData);
-      //application/x-www-form-urlencoded
-      //multipart/form-data
-      const response = await
-        fetch(url, {
-          method: "POST",
-          //headers: {"Content-Type": "application/x-www-form-urlencoded"},
-          body: wformData
-        })
-        console.log("Login response:", response);
-      const result = await response.text()
-      console.log("login to wenet response text:", result)
-      return result
-    } catch (e) {
-      console.log("error from login to wenet:", e)
-      return null;
-    }
-  }
-
-
+  
   const createNewTask = async (tokens,external_id,content) => {
     const url = `${WENET_URL}/prod/api/service/task`
     //console.log("requestTokenDetails: Tokens:", tokens);
@@ -309,5 +261,55 @@ const createFeedbackTransactionBody = (taskId, external_id,content) =>
  exports.createNewTask = createNewTask;
  exports.createNewTransaction = createNewTransaction;
  exports.requestToken = requestToken;
- exports.loginToWenet = loginToWenet;
  exports.getWenetStudents = getWenetStudents;
+
+ /*
+  const loginToWenet = async (username_or_email, password) => {
+    const url = `${WENET_URL}/prod/hub/frontend/user/login?client_id=xUi1mwCJ0X&external_id=671`
+    console.log("Login of user: ", username_or_email);
+    console.log("Login url: ", url);
+    try {
+      //const formData = {"username_or_email" : username_or_email, "password" : password}
+      //https://stackoverflow.com/questions/46640024/how-do-i-post-form-data-with-fetch-api
+      
+
+      let wformData = new formdata.FormData()
+      wformData.set("LoginForm[username_or_email]" , username_or_email);
+      wformData.set("LoginForm[password]" , password);
+      //wformData.set("rememberMe" , new formdata.Blob(["0","1"]));
+      wformData.set("LoginForm[rememberMe]" , "0");
+      
+      let wformData = new formdata.FormData()
+      wformData.set("loginform-username_or_email]" , username_or_email);
+      wformData.set("loginform-password" , password);
+      //wformData.set("rememberMe" , new formdata.Blob(["0","1"]));
+      wformData.set("loginform-rememberme" , "0");
+
+
+      
+      //let wformData = new FormData()
+      //wformData.append("LoginForm[username_or_email]" , username_or_email);
+      //wformData.append("LoginForm[password]" , password);
+      //wformData.append("LoginForm[rememberMe]" , "0");
+    
+
+      console.log("Login FormData:", wformData);
+      //application/x-www-form-urlencoded
+      //multipart/form-data
+      const response = await
+        fetch(url, {
+          method: "POST",
+          //headers: {"Content-Type": "application/x-www-form-urlencoded"},
+          body: wformData
+        })
+        console.log("Login response:", response);
+      const result = await response.text()
+      console.log("login to wenet response text:", result)
+      return result
+    } catch (e) {
+      console.log("error from login to wenet:", e)
+      return null;
+    }
+  }
+  exports.loginToWenet = loginToWenet;
+ */

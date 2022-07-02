@@ -21,7 +21,6 @@
   "teacherFeedback": "Feedback del docente",
   "send" : "Invia",
   
-
   "teacherCreateNewTask": "Nuova domanda",
   "teacherTaskTitle": "Titolo",
   "teacherTaskDescription": "Descrizione",
@@ -31,6 +30,12 @@
   "goToTag": "Vai al tag...",
   "rightAnswer" : "Risposta esatta",
   "freeAnnotation" : "Annotazione libera",
+
+  "student_comment_on_goToAttachment": "Vai al seguente allegato della timeline:",
+  "student_comment_on_goToTimelinePosition": "Vai alla timeline alla posizione seguente:",
+  "student_comment_on_goToTag": "Vai al tag:",
+  "student_comment_on_rightAnswer" : "Risposta esatta",
+  "student_comment_on_freeAnnotation" : "",
 
   "comment_on_cannotAnswer" : "inserisci un commento",
   "comment_on_cannotAnswer_done" : "Commento",

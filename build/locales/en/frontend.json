@@ -15,23 +15,28 @@
   "selectAnswer_done" : "Selected one of the following options:",
   "teacher_selectAnswer":"Selected answer",
   "enterComment" : "Enter your comment",
-
   "cannotAnswer" : "I cannot answer",
   "needClarification" : "I need clarification",
   "notSure" : "I'm not sure about the answer" ,
   "myAnswer" : "I can answer",
+  "teacherFeedback" : "Teacher Feedback",
   "send" : "Send",
 
-  "teacherFeedback" : "Teacher Feedback",
-  
   "teacherCreateNewTask"   : "Create new question",
   "teacherTaskTitle" : "Title",
   "teacherTaskDescription" : "Description",
-  "goToAttachment" : "Go to attachnent...",
+
+  "goToAttachment" : "Go to attachment...",
   "goToTimelinePosition" : "Go to timeline at the position...",
   "goToTag" : "Go to tag...",
   "rightAnswer" : "Correct answer",
   "freeAnnotation" : "Free annotation",
+
+  "student_comment_on_goToAttachment" : "Go to the following attachment:",
+  "student_comment_on_goToTimelinePosition" : "Go to timeline at the following position:",
+  "student_comment_on_goToTag" : "Go to tag:",
+  "student_comment_on_rightAnswer" : "Correct answer",
+  "student_comment_on_freeAnnotation" : "",
 
   "comment_on_cannotAnswer" : "Enter a comment",
   "comment_on_cannotAnswer_done" : "Comment",

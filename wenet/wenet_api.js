@@ -15,10 +15,10 @@ const TASK_TYPE_ID =  wenet_config.TASK_TYPE_ID //da connettore conversazionale/
 
 //@audit info getTasks()
 //https://swagger.u-hopper.com/?url=https://raw.githubusercontent.com/InternetOfUs/components-documentation/master/sources/wenet-service_api-openapi.yaml#/Task/get_tasks
-const getTasks = async (tokens, goalName, requesterId) => {
+const getTasks = async (tokens,offset, limit, goalName, requesterId) => {
     console.log(`Richiamo getTasks() con accessToken:${tokens.access_token}`);
-    const offset = 0;
-    const limit = 50;
+    if (offset==null) offset = 0;
+    if (limit==null) limit = 100;
     let url = `${WENET_URL}/prod/api/service/tasks?appId=${APP_ID}&offset=${offset}&limit=${limit}`
 
     if (goalName!=null) url +=`&goalName=${goalName}`;

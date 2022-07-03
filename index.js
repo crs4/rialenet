@@ -160,10 +160,13 @@ app.get('/students', async (req, res) => {
 app.get('/tasks', async (req, res) => {
   console.log("Richiesta tasks su sessione:", req.session.id)
   //const passcode = req.query.passcode;
+  const offset = req.query.offset;
+  const limit = req.query.limit;
   const goalName = req.query.goalName;
   // i task che interessano al docente sono i propri, quelli che interessano
   // allo studente sono quelli del docente ad esso assegnato.
-  // 
+  // n.b: Gli studenti non possono creare dei task, quindi i creatori di task
+  // sono sempre e solo docenti (o amministratori)
   const requesterId = req.session.teacher_wenet_id || req.session.external_id; // || req.query.requesterId;
   if (requesterId == null) {
     console.log("L'utente loggato non risulta nè un docente nè uno studente con un docente ad esso associato->");
@@ -171,7 +174,7 @@ app.get('/tasks', async (req, res) => {
     res.redirect("/");
   }
   else {
-    const result = await wenetConnector.getTasks(req.session.tokens, goalName, requesterId)
+    const result = await wenetConnector.getTasks(req.session.tokens, offset, limit, goalName, requesterId)
     res.send(result)
   }
 

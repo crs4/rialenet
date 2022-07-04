@@ -18,7 +18,7 @@ const TASK_TYPE_ID =  wenet_config.TASK_TYPE_ID //da connettore conversazionale/
 const getTasks = async (tokens,offset, limit, goalName, requesterId) => {
     console.log(`Richiamo getTasks() con accessToken:${tokens.access_token}`);
     if (offset==null) offset = 0;
-    if (limit==null) limit = 100;
+    if (limit==null) limit = 10;
     let url = `${WENET_URL}/prod/api/service/tasks?appId=${APP_ID}&offset=${offset}&limit=${limit}`
 
     if (goalName!=null) url +=`&goalName=${goalName}`;

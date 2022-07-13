@@ -158,16 +158,16 @@ app.get('/students', async (req, res) => {
   res.send(wenetStudents)
 })
 
-app.get('/updateprofile', async (req, res) => {
-  const userId = req.query.userId;
-  const profileId = req.query.profileId;
+app.patch('/updateprofile', async (req, res) => {
+  const userId = req.body.userId;
+  const profileId = req.body.profileId;
   
   if (userId==null || profileId==null)
   res.status(400).send("Some required parameter is missing")
   else{
-    res.status(200).json({"userId" : userId , "profileId" : profileId})
-    //const result = await dbConnector.updateStudentProfileByWenetId(userId,profileId)
-    //res.send("Update result:" + result)
+    //res.status(200).json({"userId" : userId , "profileId" : profileId})
+    const result = await dbConnector.updateStudentProfileByWenetId(userId,profileId)
+    res.send("Update result:" + result)
   }
    
 })

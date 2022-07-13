@@ -66,10 +66,19 @@ const getUserByPasscode = async (passcode) =>
     const updateStudentProfileByWenetId = async (wenetId, profileId) =>
         {
             var sql = "UPDATE users " +
-            "SET student_profile_id = ? " +
+            "SET student_profile_id = COALESCE(?,student_profile_id) " +
             "WHERE wenet_id = ?"
             var params = [profileId, wenetId];
-            return await db_all(sql, params);
+            try {
+              const result = await db.run(sql,params);
+              const msgOK =  ("UPDATE SUCCESS:" + JSON.stringify(result))
+              return msgOK
+            } catch(err) {
+              const msg = "Error in update:"+ JSON.stringify(err);
+              console.log(msg)
+              return msg;
+            }
+            
             }
 
     

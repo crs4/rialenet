@@ -66,7 +66,7 @@ const getUserByPasscode = async (passcode) =>
     const updateStudentProfileByWenetId = async (wenetId, profileId) =>
         {
             var sql = "UPDATE users " +
-            "SET student_profile_id = '?' " +
+            "SET student_profile_id = ? " +
             "WHERE wenet_id = ?"
             var params = [profileId, wenetId];
             return await db_all(sql, params);

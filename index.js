@@ -10,6 +10,7 @@ const wenetConnector = require("./wenet/wenet_api");
 const md5 = require('md5');
 const bodyParser = require('body-parser');
 const path = require('path');
+const { json } = require("body-parser");
 const PORT = process.env.PORT || 3333
 //https://levelup.gitconnected.com/how-to-render-react-app-using-express-server-in-node-js-a428ec4dfe2b
 
@@ -160,11 +161,12 @@ app.get('/students', async (req, res) => {
 app.get('/updateprofile', async (req, res) => {
   const userId = req.query.userId;
   const profileId = req.query.profileId;
+  res,json({"userId" : userId , "profileId" : profileId})
   if (userId==null || profileId==null)
   res.status(400).send("Some required parameter is missing")
   else{
-    const result = await dbConnector.updateStudentProfileByWenetId(userId,profileId)
-    res.send("Update result:" + result)
+    //const result = await dbConnector.updateStudentProfileByWenetId(userId,profileId)
+    //res.send("Update result:" + result)
   }
    
 })

@@ -63,6 +63,15 @@ const getUserByPasscode = async (passcode) =>
         return await db_all(sql, params);
         }
 
+    const updateStudentProfileByWenetId = async (wenetId, profileId) =>
+        {
+            var sql = "UPDATE users " +
+            "SET student_profile_id = '?' " +
+            "WHERE wenet_id = ?"
+            var params = [profileId, wenetId];
+            return await db_all(sql, params);
+            }
+
     
     
 
@@ -78,6 +87,7 @@ exports.getAllUsers = getAllUsers;
 exports.getAllUsersByRole = getAllUsersByRole;
 exports.getUserByPasscode = getUserByPasscode;
 exports.getStudentsProfileByTeacherWenetId = getStudentsProfileByTeacherWenetId;
+exports.updateStudentProfileByWenetId = updateStudentProfileByWenetId;
 exports.Role = Role;
 
 

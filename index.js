@@ -157,6 +157,18 @@ app.get('/students', async (req, res) => {
   res.send(wenetStudents)
 })
 
+app.get('/updateprofile', async (req, res) => {
+  const userId = req.query.userId;
+  const profileId = req.query.profileId;
+  if (userId==null || profileId==null)
+  res.status(400).send("Some required parameter is missing")
+  else{
+    const result = await dbConnector.updateStudentProfileByWenetId(userId,profileId)
+    res.send("Update result:" + result)
+  }
+   
+})
+
 app.get('/tasks', async (req, res) => {
   console.log("Richiesta tasks su sessione:", req.session.id)
   //const passcode = req.query.passcode;

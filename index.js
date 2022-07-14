@@ -31,6 +31,8 @@ var SQLiteStore = require('connect-sqlite3')(session);
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static('docs'));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.raw());

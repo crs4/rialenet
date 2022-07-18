@@ -81,6 +81,24 @@ const getUserByPasscode = async (passcode) =>
             
             }
 
+      const updateStudentProfileByPasscode = async (passcode, profileId) =>
+            {
+                var sql = "UPDATE users " +
+                "SET student_profile_id = COALESCE(?,student_profile_id) " +
+                "WHERE passcode = ?"
+                var params = [profileId, passcode];
+                try {
+                  const result = await db.run(sql,params);
+                  const msgOK =  ("UPDATE SUCCESS:" + JSON.stringify(result))
+                  return msgOK
+                } catch(err) {
+                  const msg = "Error in update:"+ JSON.stringify(err);
+                  console.log(msg)
+                  return msg;
+                }
+                
+                }
+
     
     
 
@@ -97,6 +115,7 @@ exports.getAllUsersByRole = getAllUsersByRole;
 exports.getUserByPasscode = getUserByPasscode;
 exports.getStudentsProfileByTeacherWenetId = getStudentsProfileByTeacherWenetId;
 exports.updateStudentProfileByWenetId = updateStudentProfileByWenetId;
+exports.updateStudentProfileByPasscode = updateStudentProfileByPasscode;
 exports.Role = Role;
 
 

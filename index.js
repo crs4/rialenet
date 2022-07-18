@@ -162,15 +162,16 @@ app.get('/students', async (req, res) => {
 })
 
 app.patch('/updateprofile', async (req, res) => {
-  const userId = req.body.userId;
+  //const userId = req.body.userId;
+  const passcode = req.body.passcode;
   const profileId = req.body.profileId;
   
-  if (userId==null || profileId==null)
+  if (passcode==null || profileId==null)
   res.status(400).send("Some required parameter is missing")
   else{
     //res.status(200).json({"userId" : userId , "profileId" : profileId})
-    const result = await dbConnector.updateStudentProfileByWenetId(userId,profileId)
-    res.send("Update result:" + result)
+    const result = await dbConnector.updateStudentProfileByPasscode(passcode,profileId)
+    res.send("Update result:" + JSON.stringify(result))
   }
    
 })

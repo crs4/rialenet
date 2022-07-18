@@ -1,7 +1,7 @@
 [
     {"description": null,
-        "whenever": "is_received_do_transaction('needClarification',Content) and get_closest_users_to_me(Users)) and get_profile_id(Me)",
-        "thenceforth": "wenet_post_json_to_url(Json, 'https://rialenet-forum.herokuapp.com/conversational_callback', json([note=Users]))",
+        "whenever": "is_received_do_transaction('needClarification',Content)) and get_profile_id(Me)",
+        "thenceforth": "wenet_post_json_to_url(Json, 'https://rialenet-forum.herokuapp.com/conversational_callback', json([note='prova']))",
         "ontology": null
      },
     {

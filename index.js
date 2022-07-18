@@ -100,8 +100,9 @@ app.get('/connect', async (req, res) => {
 
 })
 
-app.get('/conversational_callback', async (req, res) => {
-  res.send("Called conversational callback!")
+app.post('/conversational_callback', async (req, res) => {
+  console.log("Called conversational callback:" + JSON.stringify(req.body));
+  res.send("Called conversational callback:" + JSON.stringify(req.body) )
 });
 
 app.get('/callback', async (req, res) => {

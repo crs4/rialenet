@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../RIALE_NET_REPO_FRONTEND/rialenet_frontend"
+		},
+		{
+			"path": "../VICTORY_TEST/charts-test"
 		}
 	],
 	"settings": {}

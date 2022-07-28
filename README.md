@@ -1,2 +1,2 @@
 # rialenet
-Applicazione con express per collegamento con piattaforma wenet
+This project includes the source code of the Rialenet Web Platform

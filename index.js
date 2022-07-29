@@ -157,6 +157,7 @@ app.get('/users', async (req, res) => {
 
 app.get('/students', async (req, res) => {
   const students = await dbConnector.getStudentsProfileByTeacherWenetId(req.session.external_id)
+  console.log("Students:", JSON.stringify(students));
   const wenetStudents = await wenetConnector.getWenetStudents(students,req.session.tokens)
   res.send(wenetStudents)
 })

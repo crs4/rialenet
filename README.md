@@ -1,5 +1,5 @@
 # Rialenet
-This project includes the source code of the [Rialenet Web Platform](https://riale.ideab3.it/)). To get more informations about the project, please [visit this page](https://www.crs4.it/projectdetails/RIALENET/).
+This project includes the source code of the [Rialenet Web Platform](https://riale.ideab3.it/). To get more informations about the project, please [visit this page](https://www.crs4.it/projectdetails/RIALENET/).
 This project does not include the frontend source code (please [visit this page](https://github.com/crs4/rialenet_frontend/) to get it).
 
 ## Overview
